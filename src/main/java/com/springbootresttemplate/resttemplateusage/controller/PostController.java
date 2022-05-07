@@ -6,8 +6,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
+/**
+ * PostRestController expose our data to client side.
+ *
+ * @author Kayhan Öztürk
+ * @version  0.1
+ * @since 0.1
+ */
 @RestController
 @RequestMapping("/api/v1/posts")
 public class PostController {
@@ -32,7 +40,7 @@ public class PostController {
 
     @PutMapping("/update/{id}")
     public ResponseEntity<Post> updatePostById(@PathVariable("id") int id,
-                                               @RequestBody Post post) {
+                                               @Valid @RequestBody Post post) {
         Post updatedPost = postService.updatePostById(id, post);
         return new ResponseEntity<>(updatedPost, HttpStatus.OK);
     }
